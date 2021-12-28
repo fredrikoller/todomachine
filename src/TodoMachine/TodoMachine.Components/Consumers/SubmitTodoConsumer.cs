@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 using TodoMachine.Contracts;
 
-namespace TodoMachine.Components;
+namespace TodoMachine.Components.Consumers;
 public class SubmitTodoConsumer : IConsumer<ISubmitTodo>
 {
     private readonly ILogger<SubmitTodoConsumer> _logger;
