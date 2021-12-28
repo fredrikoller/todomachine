@@ -1,4 +1,5 @@
 using MassTransit;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -8,6 +9,7 @@ using TodoMachine.Contracts;
 namespace TodoMachine.Controllers;
 
 [ApiController]
+[Route("[controller]")]
 public class TodoController : ControllerBase
 {
     private readonly ILogger<TodoController> _logger;
@@ -20,7 +22,8 @@ public class TodoController : ControllerBase
     }
 
     [HttpPost]
-    [Route("api/todo")]
+    [ProducesResponseType(typeof(ITodoSubmissionAccepted), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ITodoSubmissionRejected), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Post(Guid id, string description)
     {
         _logger.LogInformation("Yay");
